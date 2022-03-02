@@ -3,10 +3,7 @@ package com.example.fingol1.controller;
 import com.example.fingol1.model.Response;
 import com.example.fingol1.repository.UserRepository;
 import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
 
@@ -18,7 +15,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("register")
+    @PostMapping("register")
     public Response registerUser(@RequestParam String name) {
         if (name == null) {
             return new Response("PARAMETER NAME NOT FOUND", null);
@@ -28,7 +25,7 @@ public class UserController {
         return new Response("OK", registrations);
     }
 
-    @GetMapping("delete")
+    @DeleteMapping("delete")
     public void deleteUser(@RequestParam String name) {
         userRepository.deleteUser(name);
     }
