@@ -1,7 +1,7 @@
-package com.example.fingol1.controllers;
+package com.example.fingol1.controller;
 
-import com.example.fingol1.models.Response;
-import com.example.fingol1.repositories.UserRepository;
+import com.example.fingol1.model.Response;
+import com.example.fingol1.repository.UserRepository;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;

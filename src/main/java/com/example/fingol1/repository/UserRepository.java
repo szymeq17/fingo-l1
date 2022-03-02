@@ -1,4 +1,4 @@
-package com.example.fingol1.repositories;
+package com.example.fingol1.repository;
 
 import org.springframework.stereotype.Repository;
 
