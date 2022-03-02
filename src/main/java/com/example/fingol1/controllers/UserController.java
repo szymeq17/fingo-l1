@@ -23,8 +23,20 @@ public class UserController {
         return new Response("OK", registrations);
     }
 
+    @GetMapping("delete")
+    public void deleteUser(@RequestParam String name) {
+        userRepository.deleteUser(name);
+    }
+
     @GetMapping("stats")
     public LinkedHashMap<String, Integer> getStats(@RequestParam(required = false) String mode) {
-        return userRepository.getTop3Users();
+        if (mode == null) {
+            return userRepository.getTop3Users();
+        }
+        return switch(mode) {
+            case "ALL" -> userRepository.getAllUsers();
+            case "IGNORE_CASE" -> userRepository.getAllUsersIgnoreCase();
+            default -> userRepository.getTop3Users();
+        };
     }
 }
