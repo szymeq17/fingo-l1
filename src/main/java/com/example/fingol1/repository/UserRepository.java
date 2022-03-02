@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 public class UserRepository {
     private HashMap<String, Integer> users = new HashMap<>();
 
-
     public void registerUser(String name) {
         if (users.containsKey(name)) {
             users.replace(name, users.get(name) + 1);
