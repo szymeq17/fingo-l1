@@ -17,9 +17,6 @@ public class UserController {
 
     @PostMapping("register")
     public Response registerUser(@RequestParam String name) {
-        if (name == null) {
-            return new Response("PARAMETER NAME NOT FOUND", null);
-        }
         userRepository.registerUser(name);
         int registrations = userRepository.getUserRegistrations(name);
         return new Response("OK", registrations);
