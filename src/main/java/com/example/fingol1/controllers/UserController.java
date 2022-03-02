@@ -2,6 +2,8 @@ package com.example.fingol1.controllers;
 
 import com.example.fingol1.models.Response;
 import com.example.fingol1.repositories.UserRepository;
+import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +20,9 @@ public class UserController {
 
     @GetMapping("register")
     public Response registerUser(@RequestParam String name) {
+        if (name == null) {
+            return new Response("PARAMETER NAME NOT FOUND", null);
+        }
         userRepository.registerUser(name);
         int registrations = userRepository.getUserRegistrations(name);
         return new Response("OK", registrations);
@@ -38,5 +43,11 @@ public class UserController {
             case "IGNORE_CASE" -> userRepository.getAllUsersIgnoreCase();
             default -> userRepository.getTop3Users();
         };
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public String handleMissingParams(MissingServletRequestParameterException ex) {
+        String name = ex.getParameterName();
+        return name + " parameter is missing";
     }
 }
